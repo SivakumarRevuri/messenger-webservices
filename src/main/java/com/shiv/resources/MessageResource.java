@@ -1,32 +1,26 @@
 package com.shiv.resources;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.shiv.businees.BusinessOperations;
+import com.shiv.businees.BussinessOperImpl;
 import com.shiv.model.Message;
 
 @Path("/messages")
 public class MessageResource implements BusinessOperations {
+	
+	private BussinessOperImpl implementation = new BussinessOperImpl();
 
-	protected final Map<Long, Message> messageSource = new HashMap<>();
-
-	public MessageResource() {
-		messageSource.put(1L, new Message(1, "Hello World", "Shiv", new Date()));
-	}
-
+	@POST
 	@Override
-	public void addMessage(Message message) throws Exception {
-
+	public Message addMessage(Message message) throws Exception {
+		return implementation.addMessage(message);
 	}
 
 	@Override
@@ -43,9 +37,7 @@ public class MessageResource implements BusinessOperations {
 	@Produces(MediaType.APPLICATION_XML)
 	@Override
 	public List<Message> getAllMessages() throws Exception {
-		messageSource.put(1L, new Message(1, "Hello World", "Shiv", new Date()));
-		Collection<Message> values = messageSource.values();
-		return new ArrayList<>(values);
+		return implementation.getAllMessages();
 	}
 
 	@Override

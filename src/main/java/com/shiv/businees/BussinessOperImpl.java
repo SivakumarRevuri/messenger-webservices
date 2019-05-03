@@ -1,7 +1,10 @@
 package com.shiv.businees;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
@@ -12,15 +15,17 @@ import com.shiv.model.Message;
 
 public class BussinessOperImpl implements BusinessOperations {
 
-	protected DatabaseSource source;
-
+	protected final Map<Long, Message> messages = DatabaseSource.getMessageSource();
+	
 	public BussinessOperImpl() {
-		source.getMessageSource().put(1L, new Message(1, "Hello World", "Shiv", new Date()));
+		messages.put(1L, new Message(1, "Hello World", "Shiv", new Date()));
+		messages.put(2L, new Message(2, "Hi there!!!", "Shiv", new Date()));
 	}
 
 	@Override
-	public void addMessage(Message message) throws Exception {
-
+	public Message addMessage(Message message) throws Exception {
+		messages.put((long) (messages.size() + 1), message);
+		return message;
 	}
 
 	@Override
@@ -37,7 +42,8 @@ public class BussinessOperImpl implements BusinessOperations {
 	@Produces(MediaType.APPLICATION_XML)
 	@Override
 	public List<Message> getAllMessages() throws Exception {
-		return (List<Message>) source.getMessageSource().values();
+		Collection<Message> values = messages.values();
+		return new ArrayList<>(values);
 	}
 
 	@Override

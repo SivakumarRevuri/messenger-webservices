@@ -1,5 +1,6 @@
 package com.shiv.database;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,13 +8,14 @@ import com.shiv.model.Message;
 
 public class DatabaseSource {
 
-	protected final Map<Long, Message> messageSource = new HashMap<>();
+	protected static final Map<Long, Message> messageSource = new HashMap<>();
 	
 	private DatabaseSource() {
 		super();
 	}
 
-	public Map<Long, Message> getMessageSource() {
+	public static Map<Long, Message> getMessageSource() {
+		messageSource.put(1L, new Message(1, "Hello World", "Shiv", new Date()));
 		return messageSource;
 	}
 }

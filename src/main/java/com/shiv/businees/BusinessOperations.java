@@ -6,7 +6,7 @@ import com.shiv.model.Message;
 
 public interface BusinessOperations {
 
-	public void addMessage(Message message) throws Exception;
+	public Message addMessage(Message message) throws Exception;
 	
 	public boolean updateMessage(Message message) throws Exception;
 	
