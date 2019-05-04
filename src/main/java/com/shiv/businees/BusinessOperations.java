@@ -8,9 +8,9 @@ public interface BusinessOperations {
 
 	public Message addMessage(Message message) throws Exception;
 	
-	public boolean updateMessage(Message message) throws Exception;
+	public Message updateMessage(long id, Message message) throws Exception;
 	
-	public boolean deleteMessage(Message message) throws Exception;
+	public Message deleteMessage(long id) throws Exception;
 	
 	public List<Message> getAllMessages() throws Exception;
 	

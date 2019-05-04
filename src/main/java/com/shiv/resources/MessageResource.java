@@ -2,47 +2,56 @@ package com.shiv.resources;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.shiv.businees.BusinessOperations;
 import com.shiv.businees.BussinessOperImpl;
 import com.shiv.model.Message;
 
 @Path("/messages")
-public class MessageResource implements BusinessOperations {
-	
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public class MessageResource {
+
 	private BussinessOperImpl implementation = new BussinessOperImpl();
 
+	@GET
+	public List<Message> getAllMessages() throws Exception {
+		return implementation.getAllMessages();
+	}
+	
+	@GET
+	@Path("/{messageId}")
+	public Message getMessageById(@PathParam("messageId") long id) throws Exception {
+		return implementation.getMessageById(id);
+	}
+	
 	@POST
-	@Override
 	public Message addMessage(Message message) throws Exception {
 		return implementation.addMessage(message);
 	}
 
-	@Override
-	public boolean updateMessage(Message message) throws Exception {
+	@PUT
+	@Path("/{messageId}")
+	public boolean updateMessage(@PathParam("messageId") long id, Message message) throws Exception {
 		return false;
 	}
 
-	@Override
-	public boolean deleteMessage(Message message) throws Exception {
+	@DELETE
+	@Path("/{messageId}")
+	public boolean deleteMessage(@PathParam("messageId") long id) throws Exception {
+		if (implementation.deleteMessage(id) instanceof Message) {
+			return true;
+		}
 		return false;
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Override
-	public List<Message> getAllMessages() throws Exception {
-		return implementation.getAllMessages();
-	}
-
-	@Override
-	public Message getMessageById(long id) throws Exception {
-		return null;
-	}
 
 }

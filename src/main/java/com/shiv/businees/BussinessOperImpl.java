@@ -6,11 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import com.shiv.database.DatabaseSource;
+import com.shiv.exceptions.DataNotFoundException;
 import com.shiv.model.Message;
 
 public class BussinessOperImpl implements BusinessOperations {
@@ -29,17 +26,21 @@ public class BussinessOperImpl implements BusinessOperations {
 	}
 
 	@Override
-	public boolean updateMessage(Message message) throws Exception {
-		return false;
+	public Message updateMessage(long id, Message message) throws Exception {
+		if (!messages.containsKey(id)) {
+			throw new DataNotFoundException("Failed to update the message");
+		}
+		return messages.put(id, message);
 	}
 
 	@Override
-	public boolean deleteMessage(Message message) throws Exception {
-		return false;
+	public Message deleteMessage(long id) throws Exception {
+		if (!messages.containsKey(id)) {
+			throw new DataNotFoundException("Can't delete the message");
+		}
+		return messages.remove(id);
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
 	@Override
 	public List<Message> getAllMessages() throws Exception {
 		Collection<Message> values = messages.values();
@@ -48,7 +49,11 @@ public class BussinessOperImpl implements BusinessOperations {
 
 	@Override
 	public Message getMessageById(long id) throws Exception {
-		return null;
+		Message message = messages.get(id);
+		if (message == null) {
+			throw new Exception("Data not Found Exception");
+		}
+		return message;
 	}
 
 }
