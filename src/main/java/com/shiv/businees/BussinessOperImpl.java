@@ -30,7 +30,8 @@ public class BussinessOperImpl implements BusinessOperations {
 		if (!messages.containsKey(id)) {
 			throw new DataNotFoundException("Failed to update the message");
 		}
-		return messages.put(id, message);
+		messages.put(id, message);
+		return message;
 	}
 
 	@Override
@@ -55,5 +56,12 @@ public class BussinessOperImpl implements BusinessOperations {
 		}
 		return message;
 	}
+
+	@Override
+	public List<Message> filterById(int year) throws Exception {
+		return null;
+	}
+	
+	
 
 }

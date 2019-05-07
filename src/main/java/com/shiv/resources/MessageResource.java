@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.shiv.businees.BussinessOperImpl;
@@ -40,8 +41,8 @@ public class MessageResource {
 
 	@PUT
 	@Path("/{messageId}")
-	public boolean updateMessage(@PathParam("messageId") long id, Message message) throws Exception {
-		return false;
+	public Message updateMessage(@PathParam("messageId") long id, Message message) throws Exception {
+		return implementation.updateMessage(id, message);
 	}
 
 	@DELETE
@@ -52,6 +53,11 @@ public class MessageResource {
 		}
 		return false;
 	}
-
+	
+	@GET
+	@Path("filter/{year}")
+	public List<Message> filterByYear(@QueryParam("year") int year){
+		return null;
+	}
 
 }
