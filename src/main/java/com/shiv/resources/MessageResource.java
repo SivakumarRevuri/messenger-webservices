@@ -55,9 +55,9 @@ public class MessageResource {
 	}
 	
 	@GET
-	@Path("filter/{year}")
-	public List<Message> filterByYear(@QueryParam("year") int year){
-		return null;
+	@Path("filter")
+	public List<Message> filterByYear(@QueryParam("year") int year) throws Exception{
+		return implementation.getMessageByYear(year);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.shiv.businees;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import com.shiv.model.Message;
 public class BussinessOperImpl implements BusinessOperations {
 
 	protected final Map<Long, Message> messages = DatabaseSource.getMessageSource();
-	
+
 	public BussinessOperImpl() {
 		messages.put(1L, new Message(1, "Hello World", "Shiv", new Date()));
 		messages.put(2L, new Message(2, "Hi there!!!", "Shiv", new Date()));
@@ -61,7 +62,18 @@ public class BussinessOperImpl implements BusinessOperations {
 	public List<Message> filterById(int year) throws Exception {
 		return null;
 	}
-	
-	
+
+	@Override
+	public List<Message> getMessageByYear(int year) throws Exception {
+		List<Message> messagesForYear = new ArrayList<>();
+		Calendar calendar = Calendar.getInstance();
+		for (Message message : messages.values()) {
+			calendar.setTime(message.getCreated());
+			if (calendar.get(Calendar.YEAR) == year) {
+				messagesForYear.add(message);
+			}
+		}
+		return messagesForYear;
+	}
 
 }

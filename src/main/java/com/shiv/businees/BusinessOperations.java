@@ -16,6 +16,8 @@ public interface BusinessOperations {
 	
 	public Message getMessageById(long id) throws Exception;
 	
+	public List<Message> getMessageByYear(int year) throws Exception;
+	
 	public List<Message> filterById(int year) throws Exception;
 	
 }
