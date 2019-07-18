@@ -11,7 +11,7 @@ public class DatabaseSource {
 	protected static final Map<Long, Message> messageSource = new HashMap<>();
 	
 	private DatabaseSource() {
-		super();
+		
 	}
 
 	public static Map<Long, Message> getMessageSource() {

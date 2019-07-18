@@ -12,7 +12,7 @@ public class Message {
 	private String author;
 	private Date created;
 
-	public Message() {
+	protected Message() {
 		super();
 	}
 
