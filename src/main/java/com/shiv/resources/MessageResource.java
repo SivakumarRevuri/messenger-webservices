@@ -21,7 +21,7 @@ import com.shiv.model.Message;
 @Produces(MediaType.APPLICATION_JSON)
 public class MessageResource {
 
-	private BussinessOperImpl implementation = new BussinessOperImpl();
+	private final BussinessOperImpl implementation = new BussinessOperImpl();
 
 	@GET
 	public List<Message> getAllMessages() throws Exception {

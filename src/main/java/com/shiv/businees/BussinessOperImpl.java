@@ -16,8 +16,8 @@ public class BussinessOperImpl implements BusinessOperations {
 	protected final Map<Long, Message> messages = DatabaseSource.getMessageSource();
 
 	public BussinessOperImpl() {
-		messages.put(1L, new Message(1, "Hello World", "Shiv", new Date()));
-		messages.put(2L, new Message(2, "Hi there!!!", "Shiv", new Date()));
+		messages.put(1L, new Message(1, "Hello World", "user754", new Date()));
+		messages.put(2L, new Message(2, "Hi there!!!", "admin", new Date()));
 	}
 
 	@Override
