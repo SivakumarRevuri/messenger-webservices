@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import com.shiv.businees.BussinessOperImpl;
 import com.shiv.model.Message;
 
-@Path("/messages")
+@Path("messages")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class MessageResource {
